@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Container from 'react-bootstrap/Container';
+import { Navbar } from 'react-bootstrap';
+import { Provider } from 'react-redux'
+import { Store } from 'redux'
+import { QuizesContainer } from './containers/QuizesContainer';
+import AlertContainer from './containers/AlertContainer';
+import { AppState } from './reducers/root'
+import { finishQuiz } from './actions/quizActions'
 
-const App: React.FC = () => {
+interface AppProps {
+  store: Store<AppState>
+}
+
+const App: React.FC<AppProps> = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={props.store} >
+    <Container>
+      <AlertContainer />
+      <Navbar bg="light">
+        <Navbar.Brand href="#home" 
+          onClick={ () => props.store.dispatch(finishQuiz()) }>
+            Quiz selector
+          </Navbar.Brand>
+      </Navbar>
+      <QuizesContainer />
+    </Container>
+    </Provider>
   );
 }
 
