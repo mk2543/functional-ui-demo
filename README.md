@@ -1,5 +1,11 @@
 # Demo contents
 
+Running the demo:
+1. Start backend service: `docker run --rm -p 8080:8080 otrebski/quizz`
+2. `npm install`
+3. `npm start`
+
+
 ## Functional programming principles
 
 - declarative code
